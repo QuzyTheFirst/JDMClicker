@@ -1,53 +1,101 @@
 package com.example.jdmclicker;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
     private final String BUTTONS_MESSAGE = "BUTTONS";
 
-    private int _moneyCount = 0;
+    //Navigation
+    BottomNavigationView bottomNavigationView;
 
-    private int _trackDistance = 5;
-    private int _trackReward = 10;
-    private int _trackProgress = 0;
+    //Fragments
+    GameFragment gameFragment = new GameFragment();
+    CarsFragment carsFragment = new CarsFragment();
+    TracksFragment tracksFragment = new TracksFragment();
+    IncomeFragment incomesFragment = new IncomeFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ProgressBar driveProgressBar = findViewById(R.id.driveProgressBar);
-        driveProgressBar.setMax(100);
-        driveProgressBar.setProgress(0);
+        bottomNavigationView
+                = findViewById(R.id.bottomNavigationView);
 
-        TextView moneyCountText = findViewById(R.id.moneyCount_text);
+        bottomNavigationView
+                .setOnNavigationItemSelectedListener(this);
+        bottomNavigationView.setSelectedItemId(R.id.game);
+    }
 
-        Button driveButton = findViewById(R.id.driveButton);
-        driveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                _trackProgress++;
-                int progress = (_trackProgress * 100) / _trackDistance;
+    @Override
+    public boolean
+    onNavigationItemSelected(@NonNull MenuItem item)
+    {
+        switch (item.getItemId()) {
+            case R.id.game:
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .setCustomAnimations(
+                                R.anim.fade_in,  // enter
+                                R.anim.fade_out,  // exit
+                                R.anim.slide_in,   // popEnter
+                                R.anim.slide_out  // popExit
+                        )
+                        .replace(R.id.flFragment, gameFragment)
+                        .commit();
+                return true;
 
-                if(progress < 100){
-                    driveProgressBar.setProgress(progress);
-                }
-                else{
-                    _trackProgress = 0;
-                    driveProgressBar.setProgress(0);
+            case R.id.car:
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .setCustomAnimations(
+                                R.anim.fade_in,  // enter
+                                R.anim.fade_out,  // exit
+                                R.anim.slide_in,   // popEnter
+                                R.anim.slide_out  // popExit
+                        )
+                        .replace(R.id.flFragment, carsFragment)
+                        .commit();
+                return true;
 
-                    _moneyCount += _trackReward;
-                    moneyCountText.setText(_moneyCount + "$");
-                }
-            }
-        });
+            case R.id.track:
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .setCustomAnimations(
+                                R.anim.fade_in,  // enter
+                                R.anim.fade_out,  // exit
+                                R.anim.slide_in,   // popEnter
+                                R.anim.slide_out  // popExit
+                        )
+                        .replace(R.id.flFragment, tracksFragment)
+                        .commit();
+                return true;
+
+            case R.id.income:
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .setCustomAnimations(
+                                R.anim.fade_in,  // enter
+                                R.anim.fade_out,  // exit
+                                R.anim.slide_in,   // popEnter
+                                R.anim.slide_out  // popExit
+                        )
+                        .replace(R.id.flFragment, incomesFragment)
+                        .commit();
+                return true;
+        }
+        return false;
     }
 }
