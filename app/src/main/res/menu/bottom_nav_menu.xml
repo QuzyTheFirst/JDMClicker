@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/car"
+        android:title="Cars"
+        android:icon="@drawable/caricon_foreground"
+        />
+    <item
+        android:id="@+id/track"
+        android:title="Tracks"
+        android:icon="@drawable/caricon_foreground"
+        />
+    <item
+        android:id="@+id/income"
+        android:title="Income"
+        android:icon="@drawable/caricon_foreground"
+        />
+</menu>
