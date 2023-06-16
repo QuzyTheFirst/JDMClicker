@@ -1,0 +1,16 @@
+[
+  {
+    "ID" : 1,
+    "Name" : "Toyota AE86 TRUENO",
+    "StartingCost" : 10,
+    "StartingSpeed" : 1,
+    "SpeedPerUpgrade": 0.5
+  },
+  {
+    "ID" : 2,
+    "Name" : "Honda Civic",
+    "StartingCost" : 500,
+    "StartingSpeed" : 5,
+    "SpeedPerUpgrade": 2.5
+  }
+]

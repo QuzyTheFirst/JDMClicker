@@ -1,4 +1,4 @@
-package com.example.jdmclicker;
+package com.example.jdmclicker.Scripts.UI;
 
 import android.os.Bundle;
 
@@ -11,13 +11,12 @@ import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.jdmclicker.R;
+import com.example.jdmclicker.Scripts.GameScripts.GameManager;
+
 public class GameFragment extends Fragment {
 
-    private int _moneyCount = 0;
-
-    private int _trackDistance = 5;
-    private int _trackReward = 10;
-    private int _trackProgress = 0;
+    private GameManager _gameManager;
 
     public GameFragment(){
         // require a empty public constructor
@@ -31,26 +30,19 @@ public class GameFragment extends Fragment {
         driveProgressBar.setMax(100);
         driveProgressBar.setProgress(0);
 
+        _gameManager = GameManager.Instance;
+
         TextView moneyCountText = inflatedView.findViewById(R.id.moneyCount_text);
-        moneyCountText.setText(_moneyCount + "$");
+        moneyCountText.setText(_gameManager.getMoneyCount() + "$");
 
         Button driveButton = inflatedView.findViewById(R.id.driveButton);
         driveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                _trackProgress++;
-                int progress = (_trackProgress * 100) / _trackDistance;
+                _gameManager.OnDriveButtonClick();
 
-                if(progress < 100){
-                    driveProgressBar.setProgress(progress);
-                }
-                else{
-                    _trackProgress = 0;
-                    driveProgressBar.setProgress(0);
-
-                    _moneyCount += _trackReward;
-                    moneyCountText.setText(_moneyCount + "$");
-                }
+                driveProgressBar.setProgress(_gameManager.getTrackProgress());
+                moneyCountText.setText(_gameManager.getMoneyCount() + "$");
             }
         });
 

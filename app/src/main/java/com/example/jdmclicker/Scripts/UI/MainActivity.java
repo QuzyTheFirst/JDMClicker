@@ -1,16 +1,13 @@
-package com.example.jdmclicker;
+package com.example.jdmclicker.Scripts.UI;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
+import com.example.jdmclicker.R;
+import com.example.jdmclicker.Scripts.GameScripts.GameManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
@@ -26,6 +23,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     TracksFragment tracksFragment = new TracksFragment();
     IncomeFragment incomesFragment = new IncomeFragment();
 
+    private GameManager _gameManager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +36,9 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         bottomNavigationView
                 .setOnNavigationItemSelectedListener(this);
         bottomNavigationView.setSelectedItemId(R.id.game);
+
+        _gameManager = new GameManager(getApplicationContext());
+        //getIntent().putExtra("GameManager", _gameManager);
     }
 
     @Override
