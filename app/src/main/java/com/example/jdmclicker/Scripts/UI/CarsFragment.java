@@ -3,6 +3,7 @@ package com.example.jdmclicker.Scripts.UI;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +30,9 @@ public class CarsFragment extends Fragment {
 
         TextView moneyCountText = inflatedView.findViewById(R.id.moneyCount_text);
         moneyCountText.setText(_gameManager.getMoneyCount() + "$");
+
+        RecyclerView rvCars = inflatedView.findViewById(R.id.rvCars);
+        _gameManager.getShop().GenerateCarsRecyclerView(rvCars);
 
         return inflatedView;
     }

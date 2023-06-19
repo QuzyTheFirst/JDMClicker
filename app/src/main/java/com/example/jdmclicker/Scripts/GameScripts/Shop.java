@@ -1,10 +1,15 @@
 package com.example.jdmclicker.Scripts.GameScripts;
 
+import android.content.Context;
 import android.util.Log;
 
-import com.example.jdmclicker.Scripts.CarData;
-import com.example.jdmclicker.Scripts.IncomeData;
-import com.example.jdmclicker.Scripts.TrackData;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.jdmclicker.Scripts.CarsAdapter;
+import com.example.jdmclicker.Scripts.TemporaryData.CarData;
+import com.example.jdmclicker.Scripts.TemporaryData.IncomeData;
+import com.example.jdmclicker.Scripts.TemporaryData.TrackData;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -24,13 +29,19 @@ public class Shop {
     private float _tracksCostMultiplicator = 1.15f;
     private float _passiveIncomesCostMultiplicator = 1.15f;
 
-    public Shop(String carsJSON, String tracksJSON, String incomesJSON){
+    private Context _context;
+
+    public Shop(Context context, String carsJSON, String tracksJSON, String incomesJSON){
+        _context = context;
+
         _cars = InitializeCars(carsJSON);
         _tracks = InitializeTracks(tracksJSON);
         _passiveIncomes = InitializePassiveIncomes(incomesJSON);
 
         _currentCar = _cars.get(0);
         _currentTrack = _tracks.get(0);
+
+        _currentCar.Upgrade(_carsCostMultiplicator);
     }
 
     private List<Car> InitializeCars(String jsonFileString){
@@ -102,5 +113,13 @@ public class Shop {
     }
     public Track getCurrentTrack(){
         return _currentTrack;
+    }
+
+    public void GenerateCarsRecyclerView(RecyclerView recyclerView){
+        CarsAdapter adapter = new CarsAdapter(_cars);
+
+        recyclerView.setAdapter(adapter);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(_context));
     }
 }

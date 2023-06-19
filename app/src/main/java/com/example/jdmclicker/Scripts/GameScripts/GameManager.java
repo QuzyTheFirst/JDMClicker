@@ -30,7 +30,7 @@ public class GameManager {
         String tracksJsonFileString = Utils.getJsonFromAssets(context, "tracks.json");
         String incomesJsonFileString = Utils.getJsonFromAssets(context, "incomes.json");
 
-        _shop = new Shop(carsJsonFileString, tracksJsonFileString, incomesJsonFileString);
+        _shop = new Shop(context, carsJsonFileString, tracksJsonFileString, incomesJsonFileString);
 
         if(Instance == null)
             Instance = this;
@@ -52,6 +52,10 @@ public class GameManager {
     }
     public float getMoneyCount(){
         return _moneyCount;
+    }
+
+    public Shop getShop(){
+        return _shop;
     }
 
 }
