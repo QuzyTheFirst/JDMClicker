@@ -53,7 +53,7 @@ public class CarsAdapter extends RecyclerView.Adapter<CarsAdapter.ViewHolder>{
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+
             }
         });
         //button.setEnabled(contact.isOnline());
