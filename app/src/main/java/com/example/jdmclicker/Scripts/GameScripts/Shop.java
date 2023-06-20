@@ -7,9 +7,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.jdmclicker.Scripts.CarsAdapter;
+import com.example.jdmclicker.Scripts.IncomesAdapter;
 import com.example.jdmclicker.Scripts.TemporaryData.CarData;
 import com.example.jdmclicker.Scripts.TemporaryData.IncomeData;
 import com.example.jdmclicker.Scripts.TemporaryData.TrackData;
+import com.example.jdmclicker.Scripts.TracksAdapter;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -30,8 +32,9 @@ public class Shop {
     private float _passiveIncomesCostMultiplicator = 1.15f;
 
     private Context _context;
+    private GameManager _gameManager;
 
-    public Shop(Context context, String carsJSON, String tracksJSON, String incomesJSON){
+    public Shop(Context context, GameManager gameManager, String carsJSON, String tracksJSON, String incomesJSON){
         _context = context;
 
         _cars = InitializeCars(carsJSON);
@@ -42,6 +45,38 @@ public class Shop {
         _currentTrack = _tracks.get(0);
 
         _currentCar.Upgrade(_carsCostMultiplicator);
+        _currentTrack.Upgrade(_tracksCostMultiplicator);
+
+        _gameManager = gameManager;
+    }
+
+    public boolean BuyCar(Car car){
+        if(_gameManager.getMoneyCount() >= car.getCurrentCost()){
+            _gameManager.ChangeMoneyValue(car.getCurrentCost(), GameManager.MoneyTransactionDirection.Down);
+            car.Upgrade(_carsCostMultiplicator);
+            return true;
+        }
+
+        return false;
+    }
+
+    public boolean BuyTrack(Track track){
+        if(_gameManager.getMoneyCount() >= track.getCurrentCost()){
+            _gameManager.ChangeMoneyValue(track.getCurrentCost(), GameManager.MoneyTransactionDirection.Down);
+            track.Upgrade(_tracksCostMultiplicator);
+            return true;
+        }
+
+        return false;
+    }
+
+    public boolean BuyIncome(PassiveIncome income){
+        if(_gameManager.getMoneyCount() >=  income.getCurrentCost()){
+            _gameManager.ChangeMoneyValue(income.getCurrentCost(), GameManager.MoneyTransactionDirection.Down);
+            income.Upgrade(_passiveIncomesCostMultiplicator);
+            return true;
+        }
+        return false;
     }
 
     private List<Car> InitializeCars(String jsonFileString){
@@ -117,6 +152,22 @@ public class Shop {
 
     public void GenerateCarsRecyclerView(RecyclerView recyclerView){
         CarsAdapter adapter = new CarsAdapter(_cars);
+
+        recyclerView.setAdapter(adapter);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(_context));
+    }
+
+    public void GenerateTracksRecyclerView(RecyclerView recyclerView){
+        TracksAdapter adapter = new TracksAdapter(_tracks);
+
+        recyclerView.setAdapter(adapter);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(_context));
+    }
+
+    public void GenerateIncomesRecyclerView(RecyclerView recyclerView){
+        IncomesAdapter adapter = new IncomesAdapter(_passiveIncomes);
 
         recyclerView.setAdapter(adapter);
 

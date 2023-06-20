@@ -24,16 +24,19 @@ public class GameManager {
     private int _trackProgress = 0;
 
     public static GameManager Instance;
+     
 
     public GameManager(Context context){
         String carsJsonFileString = Utils.getJsonFromAssets(context, "cars.json");
         String tracksJsonFileString = Utils.getJsonFromAssets(context, "tracks.json");
         String incomesJsonFileString = Utils.getJsonFromAssets(context, "incomes.json");
 
-        _shop = new Shop(context, carsJsonFileString, tracksJsonFileString, incomesJsonFileString);
+        _shop = new Shop(context, this, carsJsonFileString, tracksJsonFileString, incomesJsonFileString);
 
         if(Instance == null)
             Instance = this;
+
+
     }
 
     public void OnDriveButtonClick(){
@@ -53,6 +56,21 @@ public class GameManager {
     public float getMoneyCount(){
         return _moneyCount;
     }
+
+    public enum MoneyTransactionDirection{
+        Up,
+        Down
+    }
+
+    public void ChangeMoneyValue(float amount, MoneyTransactionDirection direction){
+        if(direction == MoneyTransactionDirection.Up){
+            _moneyCount += amount;
+        }
+        if(direction == MoneyTransactionDirection.Down){
+            _moneyCount -= amount;
+        }
+    }
+
 
     public Shop getShop(){
         return _shop;

@@ -13,51 +13,52 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.jdmclicker.R;
 import com.example.jdmclicker.Scripts.GameScripts.Car;
 import com.example.jdmclicker.Scripts.GameScripts.GameManager;
+import com.example.jdmclicker.Scripts.GameScripts.PassiveIncome;
 
 import java.util.List;
 
-public class CarsAdapter extends RecyclerView.Adapter<CarsAdapter.ViewHolder>{
+public class IncomesAdapter extends RecyclerView.Adapter<IncomesAdapter.ViewHolder>{
 
-    private List<Car> _cars;
+    private List<PassiveIncome> _incomes;
 
-    public CarsAdapter(List<Car> cars) {
-        _cars = cars;
+    public IncomesAdapter(List<PassiveIncome> incomes){
+        _incomes = incomes;
     }
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public IncomesAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
         // Inflate the custom layout
-        View contactView = inflater.inflate(R.layout.item_car, parent, false);
+        View contactView = inflater.inflate(R.layout.item_income, parent, false);
 
         // Return a new holder instance
-        ViewHolder viewHolder = new ViewHolder(contactView);
+        IncomesAdapter.ViewHolder viewHolder = new IncomesAdapter.ViewHolder(contactView);
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull IncomesAdapter.ViewHolder holder, int position) {
         // Get the data model based on position
-        Car car = _cars.get(position);
+        PassiveIncome income = _incomes.get(position);
 
-        String description = 
-                car.getName() +"\n" + 
-                        "Cost: " +car.getCurrentCost() + "$" + "\n" + 
-                        "Speed: " + car.getCurrentSpeed()+" km per click";
+        String description =
+                        income.getName() +"\n" +
+                        "Cost: " + income.getCurrentCost() + "$" + "\n" +
+                                "Money Per Seconds: " + income.getCurrentMoneyPerSecond()+"/s";
 
         // Set item views based on your views and data model
         TextView textView = holder.nameTextView;
         textView.setText(description);
         Button button = holder.buyButton;
-        button.setText(car.isBought() ? "Upgrade" : "Buy");
+        button.setText(income.isBought() ? "Upgrade" : "Buy");
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                GameManager.Instance.getShop().BuyCar(car);
+                GameManager.Instance.getShop().BuyIncome(income);
                 notifyItemChanged(holder.getAdapterPosition());
             }
         });
@@ -66,11 +67,9 @@ public class CarsAdapter extends RecyclerView.Adapter<CarsAdapter.ViewHolder>{
 
     @Override
     public int getItemCount() {
-        return _cars.size();
+        return _incomes.size();
     }
 
-    // Provide a direct reference to each of the views within a data item
-    // Used to cache the views within the item layout for fast access
     public class ViewHolder extends RecyclerView.ViewHolder {
         // Your holder should contain a member variable
         // for any view that will be set as you render a row
@@ -84,8 +83,9 @@ public class CarsAdapter extends RecyclerView.Adapter<CarsAdapter.ViewHolder>{
             // to access the context from any ViewHolder instance.
             super(itemView);
 
-            nameTextView = (TextView) itemView.findViewById(R.id.car_description);
+            nameTextView = (TextView) itemView.findViewById(R.id.income_description);
             buyButton = (Button) itemView.findViewById(R.id.buy_button);
         }
     }
+
 }

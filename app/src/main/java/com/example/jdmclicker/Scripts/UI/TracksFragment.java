@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.jdmclicker.R;
 import com.example.jdmclicker.Scripts.GameScripts.GameManager;
@@ -28,6 +29,9 @@ public class TracksFragment extends Fragment {
 
         TextView moneyCountText = inflatedView.findViewById(R.id.moneyCount_text);
         moneyCountText.setText(_gameManager.getMoneyCount() + "$");
+
+        RecyclerView rvTracks = inflatedView.findViewById(R.id.rvTracks);
+        _gameManager.getShop().GenerateTracksRecyclerView(rvTracks);
 
         return inflatedView;
     }
