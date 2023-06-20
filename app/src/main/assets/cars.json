@@ -12,5 +12,26 @@
     "StartingCost" : 500,
     "StartingSpeed" : 5,
     "SpeedPerUpgrade": 2.5
+  },
+  {
+    "ID" : 3,
+    "Name" : "Mazda RX-7",
+    "StartingCost" : 2000,
+    "StartingSpeed" : 10,
+    "SpeedPerUpgrade": 4.5
+  },
+  {
+    "ID" : 4,
+    "Name" : "Subaru Impreza",
+    "StartingCost" : 5000,
+    "StartingSpeed" : 15,
+    "SpeedPerUpgrade": 7.5
+  },
+  {
+    "ID" : 5,
+    "Name" : "Nissan Skyline R34",
+    "StartingCost" : 10000,
+    "StartingSpeed" : 20,
+    "SpeedPerUpgrade": 10
   }
 ]
