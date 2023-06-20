@@ -2,7 +2,7 @@
   {
     "ID" : 1,
     "Name" : "Toyota AE86 TRUENO",
-    "StartingCost" : 10,
+    "StartingCost" : "Free",
     "StartingSpeed" : 0.5,
     "SpeedPerUpgrade": 0.5
   },
@@ -16,7 +16,7 @@
   {
     "ID" : 3,
     "Name" : "Mazda RX-7",
-    "StartingCost" : 2000,
+    "StartingCost" : 1500,
     "StartingSpeed" : 10,
     "SpeedPerUpgrade": 4.5
   },
@@ -30,7 +30,7 @@
   {
     "ID" : 5,
     "Name" : "Nissan Skyline R34",
-    "StartingCost" : 10000,
+    "StartingCost" : 20000,
     "StartingSpeed" : 20,
     "SpeedPerUpgrade": 10
   }

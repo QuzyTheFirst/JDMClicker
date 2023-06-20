@@ -2,7 +2,7 @@
   {
     "ID" : 1,
     "Name" : "The First Track",
-    "Length" : 5,
+    "Length" : 10,
     "StartingCost" : 10,
     "StartingCompletionReward" : 5,
     "CompletionRewardPerUpgrade" : 5
@@ -10,10 +10,18 @@
   {
     "ID" : 2,
     "Name" : "The Second Track",
-    "Length" : 10,
-    "StartingCost" : 100,
-    "StartingCompletionReward" : 20,
+    "Length" : 20,
+    "StartingCost" : 30,
+    "StartingCompletionReward" : 15,
     "CompletionRewardPerUpgrade" : 10
+  },
+  {
+    "ID" : 3,
+    "Name" : "The Third Track",
+    "Length" : 40,
+    "StartingCost" : 100,
+    "StartingCompletionReward" : 50,
+    "CompletionRewardPerUpgrade" : 20
   }
 
 ]

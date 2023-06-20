@@ -9,8 +9,29 @@
   {
     "ID" : 2,
     "Name" : "Youtube",
-    "StartingCost" : 10,
-    "StartingMoneyPerSecond": 0.1,
-    "MoneyPerSecondPerUpgrade": 0.1
+    "StartingCost" : 20,
+    "StartingMoneyPerSecond": 0.5,
+    "MoneyPerSecondPerUpgrade": 0.2
+  },
+  {
+    "ID" : 3,
+    "Name" : "Youtuber rent",
+    "StartingCost" : 40,
+    "StartingMoneyPerSecond": 1,
+    "MoneyPerSecondPerUpgrade": 0.3
+  },
+  {
+    "ID" : 4,
+    "Name" : "Ads",
+    "StartingCost" : 70,
+    "StartingMoneyPerSecond": 2,
+    "MoneyPerSecondPerUpgrade": 0.4
+  },
+  {
+    "ID" : 5,
+    "Name" : "Racing sponsor",
+    "StartingCost" : 100,
+    "StartingMoneyPerSecond": 5,
+    "MoneyPerSecondPerUpgrade": 0.5
   }
 ]
