@@ -47,7 +47,7 @@ public class IncomesAdapter extends RecyclerView.Adapter<IncomesAdapter.ViewHold
         String description =
                         income.getName() +"\n" +
                         "Cost: " + new DecimalFormat("##.##").format(income.getCurrentCost()) + "$" + "\n" +
-                                "Money Per Seconds: " + income.getCurrentMoneyPerSecond()+"/s";
+                                "Money Per Seconds: " + new DecimalFormat("##.##").format(income.getCurrentMoneyPerSecond())+"/s";
 
         // Set item views based on your views and data model
         TextView textView = holder.nameTextView;
@@ -58,7 +58,7 @@ public class IncomesAdapter extends RecyclerView.Adapter<IncomesAdapter.ViewHold
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                GameManager.Instance.getShop().BuyIncome(income);
+                GameManager.Instance.getShop().BuyUpgradeIncome(income);
                 notifyItemChanged(holder.getAdapterPosition());
             }
         });

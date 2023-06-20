@@ -23,6 +23,8 @@ public class CarsAdapter extends RecyclerView.Adapter<CarsAdapter.ViewHolder>{
     private List<Car> _cars;
     private int[] _images;
 
+    private int _chosenCarPosition;
+
     public CarsAdapter(List<Car> cars, int[] images) {
         _cars = cars;
         _images = images;
@@ -57,16 +59,29 @@ public class CarsAdapter extends RecyclerView.Adapter<CarsAdapter.ViewHolder>{
         TextView textView = holder.nameTextView;
         Button button = holder.buyButton;
 
+        if(position < _images.length)
+            imageView.setImageResource(_images[position]);
 
-        imageView.setImageResource(_images[position]);
         textView.setText(description);
-        button.setText(car.isBought() ? "Upgrade" : "Buy");
+
+        boolean isBought = car.isBought();
+        boolean isSelected = GameManager.Instance.getShop().getCurrentCar() == car;
+
+        if(!isBought){
+            button.setText("Buy");
+        }
+        else if(isBought && isSelected){
+            button.setText("Upgrade");
+        }
+        else if(isBought && !isSelected){
+            button.setText("Select");
+        }
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                GameManager.Instance.getShop().BuyCar(car);
-                notifyItemChanged(holder.getAdapterPosition());
+                GameManager.Instance.getShop().BuyUpgradeSelectCar(car);
+                notifyDataSetChanged();
             }
         });
         //button.setEnabled(contact.isOnline());

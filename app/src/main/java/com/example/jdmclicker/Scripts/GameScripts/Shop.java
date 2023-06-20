@@ -59,27 +59,39 @@ public class Shop {
         _gameManager = gameManager;
     }
 
-    public boolean BuyCar(Car car){
+    public boolean BuyUpgradeSelectCar(Car car){
+        if(car.isBought() && _currentCar != car){
+            _currentCar = car;
+            return true;
+        }
+
         if(_gameManager.getMoneyCount() >= car.getCurrentCost()){
             _gameManager.ChangeMoneyValue(car.getCurrentCost(), GameManager.MoneyTransactionDirection.Down);
             car.Upgrade(_carsCostMultiplicator);
+            _currentCar = car;
             return true;
         }
 
         return false;
     }
 
-    public boolean BuyTrack(Track track){
+    public boolean BuyUpgradeSelectTrack(Track track){
+        if(track.isBought() && _currentTrack != track){
+            _currentTrack = track;
+            return true;
+        }
+
         if(_gameManager.getMoneyCount() >= track.getCurrentCost()){
             _gameManager.ChangeMoneyValue(track.getCurrentCost(), GameManager.MoneyTransactionDirection.Down);
             track.Upgrade(_tracksCostMultiplicator);
+            _currentTrack = track;
             return true;
         }
 
         return false;
     }
 
-    public boolean BuyIncome(PassiveIncome income){
+    public boolean BuyUpgradeIncome(PassiveIncome income){
         if(_gameManager.getMoneyCount() >=  income.getCurrentCost()){
             _gameManager.ChangeMoneyValue(income.getCurrentCost(), GameManager.MoneyTransactionDirection.Down);
             income.Upgrade(_passiveIncomesCostMultiplicator);
@@ -155,6 +167,9 @@ public class Shop {
     public Car getCurrentCar(){
         return _currentCar;
     }
+
+
+
     public Track getCurrentTrack(){
         return _currentTrack;
     }

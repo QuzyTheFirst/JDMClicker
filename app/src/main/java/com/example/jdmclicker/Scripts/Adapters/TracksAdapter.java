@@ -20,6 +20,9 @@ import java.util.List;
 public class TracksAdapter extends RecyclerView.Adapter<TracksAdapter.ViewHolder>{
     private List<Track> _tracks;
 
+    private int[] _images;
+    private int _chosenTrackPosition;
+
     public TracksAdapter(List<Track> tracks){
         _tracks = tracks;
     }
@@ -52,15 +55,28 @@ public class TracksAdapter extends RecyclerView.Adapter<TracksAdapter.ViewHolder
 
             // Set item views based on your views and data model
             TextView textView = holder.nameTextView;
-            textView.setText(description);
             Button button = holder.buyButton;
-            button.setText(track.isBought() ? "Upgrade" : "Buy");
+
+            textView.setText(description);
+
+        boolean isBought = track.isBought();
+        boolean isSelected = GameManager.Instance.getShop().getCurrentTrack() == track;
+
+        if(!isBought){
+            button.setText("Buy");
+        }
+        else if(isBought && isSelected){
+            button.setText("Upgrade");
+        }
+        else if(isBought && !isSelected){
+            button.setText("Select");
+        }
 
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    GameManager.Instance.getShop().BuyTrack(track);
-                    notifyItemChanged(holder.getAdapterPosition());
+                    GameManager.Instance.getShop().BuyUpgradeSelectTrack(track);
+                    notifyDataSetChanged();
                 }
             });
             //button.setEnabled(contact.isOnline());

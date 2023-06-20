@@ -3,7 +3,7 @@
     "ID" : 1,
     "Name" : "Toyota AE86 TRUENO",
     "StartingCost" : 10,
-    "StartingSpeed" : 0.5,
+    "StartingSpeed" : 2,
     "SpeedPerUpgrade": 0.5
   },
   {
@@ -28,10 +28,10 @@
     "SpeedPerUpgrade": 7.5
   },
   {
-    "ID" : 5,
-    "Name" : "Nissan Skyline R34",
-    "StartingCost" : 20000,
-    "StartingSpeed" : 20,
-    "SpeedPerUpgrade": 10
+  "ID" : 5,
+  "Name" : "Nissan Skyline R34",
+  "StartingCost" : 20000,
+  "StartingSpeed" : 20,
+  "SpeedPerUpgrade": 10
   }
 ]

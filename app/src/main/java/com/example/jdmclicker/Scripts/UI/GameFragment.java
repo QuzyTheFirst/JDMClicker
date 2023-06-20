@@ -40,6 +40,7 @@ public class GameFragment extends Fragment {
         _moneyCountText = inflatedView.findViewById(R.id.moneyCount_text);
         _moneyCountText.setText(new DecimalFormat("##.##").format(_gameManager.getMoneyCount()) + "$");
 
+
         _gameManager.OnMoneyValueChange.AddCallback(this::MoneyChanged);
 
         Button driveButton = inflatedView.findViewById(R.id.driveButton);
@@ -61,6 +62,30 @@ public class GameFragment extends Fragment {
     }
 
     @Override
+    public void onDetach() {
+        super.onDetach();
+        _gameManager.OnMoneyValueChange.RemoveCallback(this::MoneyChanged);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        _gameManager.OnMoneyValueChange.RemoveCallback(this::MoneyChanged);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        _gameManager.OnMoneyValueChange.RemoveCallback(this::MoneyChanged);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        _gameManager.OnMoneyValueChange.RemoveCallback(this::MoneyChanged);
+    }
+
+   @Override
     public void onDestroyView() {
         super.onDestroyView();
 

@@ -48,6 +48,30 @@ public class TracksFragment extends Fragment {
     }
 
     @Override
+    public void onDetach() {
+        super.onDetach();
+        _gameManager.OnMoneyValueChange.RemoveCallback(this::MoneyChanged);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        _gameManager.OnMoneyValueChange.RemoveCallback(this::MoneyChanged);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        _gameManager.OnMoneyValueChange.RemoveCallback(this::MoneyChanged);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        _gameManager.OnMoneyValueChange.RemoveCallback(this::MoneyChanged);
+    }
+
+    @Override
     public void onDestroyView() {
         super.onDestroyView();
         _gameManager.OnMoneyValueChange.RemoveCallback(this::MoneyChanged);
