@@ -1,4 +1,4 @@
-package com.example.jdmclicker.Scripts;
+package com.example.jdmclicker.Scripts.Adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -11,10 +11,10 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.jdmclicker.R;
-import com.example.jdmclicker.Scripts.GameScripts.Car;
 import com.example.jdmclicker.Scripts.GameScripts.GameManager;
 import com.example.jdmclicker.Scripts.GameScripts.PassiveIncome;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class IncomesAdapter extends RecyclerView.Adapter<IncomesAdapter.ViewHolder>{
@@ -46,7 +46,7 @@ public class IncomesAdapter extends RecyclerView.Adapter<IncomesAdapter.ViewHold
 
         String description =
                         income.getName() +"\n" +
-                        "Cost: " + income.getCurrentCost() + "$" + "\n" +
+                        "Cost: " + new DecimalFormat("##.##").format(income.getCurrentCost()) + "$" + "\n" +
                                 "Money Per Seconds: " + income.getCurrentMoneyPerSecond()+"/s";
 
         // Set item views based on your views and data model

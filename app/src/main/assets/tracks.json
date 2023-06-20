@@ -12,7 +12,7 @@
     "Name" : "The Second Track",
     "Length" : 20,
     "StartingCost" : 30,
-    "StartingCompletionReward" : 15,
+    "StartingCompletionReward" : 25,
     "CompletionRewardPerUpgrade" : 10
   },
   {

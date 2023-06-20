@@ -1,4 +1,4 @@
-package com.example.jdmclicker.Scripts;
+package com.example.jdmclicker.Scripts.Adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -14,6 +14,7 @@ import com.example.jdmclicker.R;
 import com.example.jdmclicker.Scripts.GameScripts.GameManager;
 import com.example.jdmclicker.Scripts.GameScripts.Track;
 
+import java.text.DecimalFormat;
 import java.util.List;
 
 public class TracksAdapter extends RecyclerView.Adapter<TracksAdapter.ViewHolder>{
@@ -45,7 +46,7 @@ public class TracksAdapter extends RecyclerView.Adapter<TracksAdapter.ViewHolder
 
             String description =
                             track.getName() + "\n" +
-                            "Cost: " + track.getCurrentCost() + "$" + "\n" +
+                            "Cost: " + new DecimalFormat("##.##").format(track.getCurrentCost()) + "$" + "\n" +
                             "Length: " + track.getTrackLength() + "km" + "\n" +
                             "Reward: " + track.getCurrentCompletionReward()+ "$";
 

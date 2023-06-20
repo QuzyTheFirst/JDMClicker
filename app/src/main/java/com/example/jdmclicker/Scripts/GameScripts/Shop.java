@@ -6,12 +6,12 @@ import android.util.Log;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.jdmclicker.Scripts.CarsAdapter;
-import com.example.jdmclicker.Scripts.IncomesAdapter;
+import com.example.jdmclicker.Scripts.Adapters.CarsAdapter;
+import com.example.jdmclicker.Scripts.Adapters.IncomesAdapter;
 import com.example.jdmclicker.Scripts.TemporaryData.CarData;
 import com.example.jdmclicker.Scripts.TemporaryData.IncomeData;
 import com.example.jdmclicker.Scripts.TemporaryData.TrackData;
-import com.example.jdmclicker.Scripts.TracksAdapter;
+import com.example.jdmclicker.Scripts.Adapters.TracksAdapter;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 

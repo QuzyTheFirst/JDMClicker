@@ -1,20 +1,10 @@
 package com.example.jdmclicker.Scripts.GameScripts;
 
 import android.content.Context;
-import android.os.Environment;
-import android.os.Parcel;
-import android.os.Parcelable;
-import android.util.Log;
 
-import androidx.annotation.NonNull;
-
+import com.example.jdmclicker.Scripts.EventHandler;
 import com.example.jdmclicker.Scripts.Utils;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
-import java.io.File;
-import java.lang.reflect.Type;
-import java.util.List;
 
 public class GameManager {
     private float _moneyCount;
@@ -24,7 +14,8 @@ public class GameManager {
     private int _trackProgress = 0;
 
     public static GameManager Instance;
-     
+
+    public EventHandler<Float> OnMoneyValueChange = new EventHandler<>();
 
     public GameManager(Context context){
         String carsJsonFileString = Utils.getJsonFromAssets(context, "cars.json");
@@ -41,11 +32,10 @@ public class GameManager {
 
     public void OnDriveButtonClick(){
         _trackProgress += _shop.getCurrentCar().getCurrentSpeed();
-        int progress = Math.round((_trackProgress * 100) / _shop.getCurrentTrack().getTrackLength());
 
-        if(progress >= 100){
-            _moneyCount += _shop.getCurrentTrack().getCurrentCompletionReward();
-            _trackProgress = 0;
+        while(getTrackProgress() >= 100){
+            _trackProgress -= _shop.getCurrentTrack().getTrackLength();
+            ChangeMoneyValue(_shop.getCurrentTrack().getCurrentCompletionReward(), MoneyTransactionDirection.Up);
         }
     }
 
@@ -69,6 +59,8 @@ public class GameManager {
         if(direction == MoneyTransactionDirection.Down){
             _moneyCount -= amount;
         }
+
+        OnMoneyValueChange.invoke(this, _moneyCount);
     }
 
 

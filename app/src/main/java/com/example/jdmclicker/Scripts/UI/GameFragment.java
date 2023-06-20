@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,10 +14,15 @@ import android.widget.TextView;
 
 import com.example.jdmclicker.R;
 import com.example.jdmclicker.Scripts.GameScripts.GameManager;
+import com.example.jdmclicker.Scripts.IEvent;
+
+import java.text.DecimalFormat;
 
 public class GameFragment extends Fragment {
 
     private GameManager _gameManager;
+
+    private TextView _moneyCountText;
 
     public GameFragment(){
         // require a empty public constructor
@@ -32,8 +38,10 @@ public class GameFragment extends Fragment {
 
         _gameManager = GameManager.Instance;
 
-        TextView moneyCountText = inflatedView.findViewById(R.id.moneyCount_text);
-        moneyCountText.setText(_gameManager.getMoneyCount() + "$");
+        _moneyCountText = inflatedView.findViewById(R.id.moneyCount_text);
+        _moneyCountText.setText(new DecimalFormat("##.##").format(_gameManager.getMoneyCount()) + "$");
+
+        _gameManager.OnMoneyValueChange.AddCallback(this::MoneyChanged);
 
         Button driveButton = inflatedView.findViewById(R.id.driveButton);
         driveButton.setOnClickListener(new View.OnClickListener() {
@@ -42,10 +50,22 @@ public class GameFragment extends Fragment {
                 _gameManager.OnDriveButtonClick();
 
                 driveProgressBar.setProgress(_gameManager.getTrackProgress());
-                moneyCountText.setText(_gameManager.getMoneyCount() + "$");
             }
         });
 
         return inflatedView;
     }
+
+    public void MoneyChanged(Object source, Float moneyCount){
+        Log.i("myData", "money visual updated");
+        _moneyCountText.setText(new DecimalFormat("##.##").format(moneyCount) + "$");
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
+        _gameManager.OnMoneyValueChange.RemoveCallback(this::MoneyChanged);
+    }
+
 }
