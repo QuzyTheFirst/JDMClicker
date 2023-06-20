@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -20,9 +21,11 @@ import java.util.List;
 public class CarsAdapter extends RecyclerView.Adapter<CarsAdapter.ViewHolder>{
 
     private List<Car> _cars;
+    private int[] _images;
 
-    public CarsAdapter(List<Car> cars) {
+    public CarsAdapter(List<Car> cars, int[] images) {
         _cars = cars;
+        _images = images;
     }
 
     @NonNull
@@ -50,9 +53,13 @@ public class CarsAdapter extends RecyclerView.Adapter<CarsAdapter.ViewHolder>{
                         "Speed: " + car.getCurrentSpeed()+" km per click";
 
         // Set item views based on your views and data model
+        ImageView imageView = holder.carImageView;
         TextView textView = holder.nameTextView;
-        textView.setText(description);
         Button button = holder.buyButton;
+
+
+        imageView.setImageResource(_images[position]);
+        textView.setText(description);
         button.setText(car.isBought() ? "Upgrade" : "Buy");
 
         button.setOnClickListener(new View.OnClickListener() {
@@ -75,6 +82,7 @@ public class CarsAdapter extends RecyclerView.Adapter<CarsAdapter.ViewHolder>{
     public class ViewHolder extends RecyclerView.ViewHolder {
         // Your holder should contain a member variable
         // for any view that will be set as you render a row
+        public ImageView carImageView;
         public TextView nameTextView;
         public Button buyButton;
 
@@ -85,6 +93,7 @@ public class CarsAdapter extends RecyclerView.Adapter<CarsAdapter.ViewHolder>{
             // to access the context from any ViewHolder instance.
             super(itemView);
 
+            carImageView = itemView.findViewById(R.id.carImageView);
             nameTextView = (TextView) itemView.findViewById(R.id.car_description);
             buyButton = (Button) itemView.findViewById(R.id.buy_button);
         }

@@ -14,7 +14,6 @@ import android.widget.TextView;
 
 import com.example.jdmclicker.R;
 import com.example.jdmclicker.Scripts.GameScripts.GameManager;
-import com.example.jdmclicker.Scripts.IEvent;
 
 import java.text.DecimalFormat;
 

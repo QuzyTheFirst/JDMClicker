@@ -1,4 +1,4 @@
-package com.example.jdmclicker.Scripts;
+package com.example.jdmclicker.Scripts.Events;
 
 import java.util.ArrayList;
 

@@ -6,6 +6,7 @@ import android.util.Log;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.jdmclicker.R;
 import com.example.jdmclicker.Scripts.Adapters.CarsAdapter;
 import com.example.jdmclicker.Scripts.Adapters.IncomesAdapter;
 import com.example.jdmclicker.Scripts.TemporaryData.CarData;
@@ -33,6 +34,14 @@ public class Shop {
 
     private Context _context;
     private GameManager _gameManager;
+
+    private int[] _carsImages ={
+            R.drawable.trueno,
+            R.drawable.civic,
+            R.drawable.rx7,
+            R.drawable.subaru,
+            R.drawable.skyline
+    };
 
     public Shop(Context context, GameManager gameManager, String carsJSON, String tracksJSON, String incomesJSON){
         _context = context;
@@ -151,7 +160,7 @@ public class Shop {
     }
 
     public void GenerateCarsRecyclerView(RecyclerView recyclerView){
-        CarsAdapter adapter = new CarsAdapter(_cars);
+        CarsAdapter adapter = new CarsAdapter(_cars, _carsImages);
 
         recyclerView.setAdapter(adapter);
 

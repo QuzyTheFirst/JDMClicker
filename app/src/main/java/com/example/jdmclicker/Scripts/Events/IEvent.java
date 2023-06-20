@@ -1,4 +1,4 @@
-package com.example.jdmclicker.Scripts;
+package com.example.jdmclicker.Scripts.Events;
 
 @FunctionalInterface
 public interface IEvent<TEventArgs extends Object>{

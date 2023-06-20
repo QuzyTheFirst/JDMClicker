@@ -2,7 +2,7 @@ package com.example.jdmclicker.Scripts.GameScripts;
 
 import android.content.Context;
 
-import com.example.jdmclicker.Scripts.EventHandler;
+import com.example.jdmclicker.Scripts.Events.EventHandler;
 import com.example.jdmclicker.Scripts.Utils;
 
 
