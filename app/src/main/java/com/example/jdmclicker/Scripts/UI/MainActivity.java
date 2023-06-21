@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 .setOnNavigationItemSelectedListener(this);
         bottomNavigationView.setSelectedItemId(R.id.game);
 
-        _gameManager = new GameManager(getApplicationContext());
+        _gameManager = new GameManager(this, getApplicationContext());
         //getIntent().putExtra("GameManager", _gameManager);
     }
 

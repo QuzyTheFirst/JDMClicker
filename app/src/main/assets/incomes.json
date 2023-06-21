@@ -15,7 +15,7 @@
   },
   {
     "ID" : 2,
-    "Name" : "Youtuber rent",
+    "Name" : "Youtuber Editor",
     "StartingCost" : 40,
     "StartingMoneyPerSecond": 1,
     "MoneyPerSecondPerUpgrade": 0.3

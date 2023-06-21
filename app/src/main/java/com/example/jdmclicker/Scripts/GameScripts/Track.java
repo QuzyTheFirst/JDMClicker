@@ -23,12 +23,16 @@ public class Track {
 
     public void Upgrade(float costMultiplicator){
         if(!_isBought)
-            _isBought = true;
+            return;
 
         _currentLevel++;
 
         _currentCost *= costMultiplicator;
         _currentCompletionReward += _completionRewardPerUpgrade;
+    }
+
+    public void Buy(){
+        _isBought = true;
     }
 
     public int getID(){

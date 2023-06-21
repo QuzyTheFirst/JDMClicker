@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -20,9 +21,11 @@ import java.util.List;
 public class IncomesAdapter extends RecyclerView.Adapter<IncomesAdapter.ViewHolder>{
 
     private List<PassiveIncome> _incomes;
+    private int[] _images;
 
-    public IncomesAdapter(List<PassiveIncome> incomes){
+    public IncomesAdapter(List<PassiveIncome> incomes, int[] images){
         _incomes = incomes;
+        _images = images;
     }
 
     @NonNull
@@ -50,9 +53,14 @@ public class IncomesAdapter extends RecyclerView.Adapter<IncomesAdapter.ViewHold
                                 "Money Per Seconds: " + new DecimalFormat("##.##").format(income.getCurrentMoneyPerSecond())+"$/s";
 
         // Set item views based on your views and data model
+        ImageView imageView = holder.incomeImageView;
         TextView textView = holder.nameTextView;
-        textView.setText(description);
         Button button = holder.buyButton;
+
+        if(position < _images.length)
+            imageView.setImageResource(_images[position]);
+
+        textView.setText(description);
         button.setText(income.isBought() ? "Upgrade" : "Buy");
 
         button.setOnClickListener(new View.OnClickListener() {
@@ -73,6 +81,7 @@ public class IncomesAdapter extends RecyclerView.Adapter<IncomesAdapter.ViewHold
     public class ViewHolder extends RecyclerView.ViewHolder {
         // Your holder should contain a member variable
         // for any view that will be set as you render a row
+        public ImageView incomeImageView;
         public TextView nameTextView;
         public Button buyButton;
 
@@ -83,6 +92,7 @@ public class IncomesAdapter extends RecyclerView.Adapter<IncomesAdapter.ViewHold
             // to access the context from any ViewHolder instance.
             super(itemView);
 
+            incomeImageView = itemView.findViewById(R.id.incomeImageView);
             nameTextView = (TextView) itemView.findViewById(R.id.income_description);
             buyButton = (Button) itemView.findViewById(R.id.buy_button);
         }

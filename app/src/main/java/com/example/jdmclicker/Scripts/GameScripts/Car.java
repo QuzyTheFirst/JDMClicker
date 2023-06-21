@@ -20,12 +20,16 @@ public class Car {
 
     public void Upgrade(float costMultiplicator){
         if(!_isBought)
-            _isBought = true;
+            return;
 
         _currentLevel++;
 
         _currentCost *= costMultiplicator;
         _currentSpeed += _speedPerUpgrade;
+    }
+
+    public void Buy(){
+        _isBought = true;
     }
 
     public int getID(){

@@ -21,12 +21,16 @@ public class PassiveIncome {
 
     public void Upgrade(float costMultiplicator){
         if(!_isBought)
-            _isBought = true;
+            return;
 
         _currentLevel++;
 
         _currentCost *= costMultiplicator;
         _currentMoneyPerSecond += _moneyPerSecondPerUpgrade;
+    }
+
+    public void Buy(){
+        _isBought = true;
     }
 
     public int getID(){

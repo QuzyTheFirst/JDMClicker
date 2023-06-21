@@ -1,5 +1,7 @@
 package com.example.jdmclicker.Scripts.GameScripts;
 
+import static java.util.stream.Collectors.toList;
+
 import android.content.Context;
 import android.util.Log;
 
@@ -16,8 +18,10 @@ import com.example.jdmclicker.Scripts.Adapters.TracksAdapter;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Array;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Shop {
@@ -51,6 +55,14 @@ public class Shop {
             R.drawable.beachroad
     };
 
+    private int[] _incomesImages = {
+            R.drawable.grandma,
+            R.drawable.youtube,
+            R.drawable.editor,
+            R.drawable.ads,
+            R.drawable.racingsponsor,
+    };
+
     public int getCarImage(int id){
         if(id < _carsImages.length)
             return _carsImages[id];
@@ -65,6 +77,13 @@ public class Shop {
         return 0;
     }
 
+    public int getIncomeImage(int id){
+        if(id < _incomesImages.length)
+            return _incomesImages[id];
+
+        return 0;
+    }
+
     public Shop(Context context, GameManager gameManager, String carsJSON, String tracksJSON, String incomesJSON){
         _context = context;
 
@@ -75,13 +94,18 @@ public class Shop {
         _currentCar = _cars.get(0);
         _currentTrack = _tracks.get(0);
 
-        _currentCar.Upgrade(_carsCostMultiplicator);
-        _currentTrack.Upgrade(_tracksCostMultiplicator);
+        _currentCar.Buy();
+        _currentTrack.Buy();
 
         _gameManager = gameManager;
     }
 
     public boolean BuyUpgradeSelectCar(Car car){
+        if(!car.isBought()){
+            car.Buy();
+            return true;
+        }
+
         if(car.isBought() && _currentCar != car){
             _currentCar = car;
             return true;
@@ -98,6 +122,11 @@ public class Shop {
     }
 
     public boolean BuyUpgradeSelectTrack(Track track){
+        if(!track.isBought()){
+            track.Buy();
+            return true;
+        }
+
         if(track.isBought() && _currentTrack != track){
             _currentTrack = track;
             return true;
@@ -114,6 +143,11 @@ public class Shop {
     }
 
     public boolean BuyUpgradeIncome(PassiveIncome income){
+        if(!income.isBought()){
+            income.Buy();
+            return true;
+        }
+
         if(_gameManager.getMoneyCount() >=  income.getCurrentCost()){
             _gameManager.ChangeMoneyValue(income.getCurrentCost(), GameManager.MoneyTransactionDirection.Down);
             income.Upgrade(_passiveIncomesCostMultiplicator);
@@ -186,6 +220,19 @@ public class Shop {
         return incomes;
     }
 
+    public float getPassiveIncomesMoneyCount(){
+        List<PassiveIncome> boughtIncomes = _passiveIncomes.parallelStream().filter(income -> income.isBought()).collect(toList());
+
+        if(boughtIncomes.size() == 0)
+            return 0;
+
+        float moneyValue = 0;
+        for(int i =0; i < boughtIncomes.size();i++){
+            moneyValue += boughtIncomes.get(i).getCurrentMoneyPerSecond();
+        }
+        return moneyValue;
+    }
+
     public Car getCurrentCar(){
         return _currentCar;
     }
@@ -213,7 +260,7 @@ public class Shop {
     }
 
     public void GenerateIncomesRecyclerView(RecyclerView recyclerView){
-        IncomesAdapter adapter = new IncomesAdapter(_passiveIncomes);
+        IncomesAdapter adapter = new IncomesAdapter(_passiveIncomes, _incomesImages);
 
         recyclerView.setAdapter(adapter);
 
