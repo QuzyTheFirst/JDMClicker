@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -45,6 +46,12 @@ public class GameFragment extends Fragment {
 
         _myMoneyChangeMethod = this::MoneyChanged;
         _gameManager.OnMoneyValueChange.AddCallback(_myMoneyChangeMethod);
+
+        ImageView backgroundView = inflatedView.findViewById(R.id.backgroundView);
+        backgroundView.setImageResource(_gameManager.getShop().getTrackImage(_gameManager.getShop().getCurrentTrack().getID()));
+
+        ImageView currentCarImageView = inflatedView.findViewById(R.id.currentCarImageView);
+        currentCarImageView.setImageResource(_gameManager.getShop().getCarImage(_gameManager.getShop().getCurrentCar().getID()));
 
         Button driveButton = inflatedView.findViewById(R.id.driveButton);
         driveButton.setOnClickListener(new View.OnClickListener() {

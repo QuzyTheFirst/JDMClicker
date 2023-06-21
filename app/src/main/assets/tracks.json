@@ -1,14 +1,14 @@
 [
   {
-    "ID" : 1,
+    "ID" : 0,
     "Name" : "Field Track",
-    "Length" : 10,
+    "Length" : 5,
     "StartingCost" : 10,
     "StartingCompletionReward" : 5,
     "CompletionRewardPerUpgrade" : 5
   },
   {
-    "ID" : 2,
+    "ID" : 1,
     "Name" : "Forest Track",
     "Length" : 20,
     "StartingCost" : 30,
@@ -16,7 +16,7 @@
     "CompletionRewardPerUpgrade" : 10
   },
   {
-    "ID" : 3,
+    "ID" : 2,
     "Name" : "Winter Track",
     "Length" : 40,
     "StartingCost" : 100,
@@ -24,7 +24,7 @@
     "CompletionRewardPerUpgrade" : 20
   },
   {
-    "ID" : 4,
+    "ID" : 3,
     "Name" : "City Track",
     "Length" : 40,
     "StartingCost" : 100,
@@ -32,7 +32,7 @@
     "CompletionRewardPerUpgrade" : 20
   },
   {
-    "ID" : 5,
+    "ID" : 4,
     "Name" : "Beach Track",
     "Length" : 40,
     "StartingCost" : 100,

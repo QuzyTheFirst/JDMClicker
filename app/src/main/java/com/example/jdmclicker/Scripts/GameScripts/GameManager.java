@@ -26,8 +26,6 @@ public class GameManager {
 
         if(Instance == null)
             Instance = this;
-
-
     }
 
     public void OnDriveButtonClick(){

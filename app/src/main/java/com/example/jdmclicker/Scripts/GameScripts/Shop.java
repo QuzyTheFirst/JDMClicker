@@ -51,6 +51,20 @@ public class Shop {
             R.drawable.beachroad
     };
 
+    public int getCarImage(int id){
+        if(id < _carsImages.length)
+            return _carsImages[id];
+
+        return 0;
+    }
+
+    public int getTrackImage(int id){
+        if(id < _tracksImages.length)
+            return _tracksImages[id];
+
+        return 0;
+    }
+
     public Shop(Context context, GameManager gameManager, String carsJSON, String tracksJSON, String incomesJSON){
         _context = context;
 
