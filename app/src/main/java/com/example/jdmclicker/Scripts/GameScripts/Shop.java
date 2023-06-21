@@ -191,7 +191,7 @@ public class Shop {
     }
 
     public void GenerateTracksRecyclerView(RecyclerView recyclerView){
-        TracksAdapter adapter = new TracksAdapter(_tracks);
+        TracksAdapter adapter = new TracksAdapter(_tracks, _tracksImages);
 
         recyclerView.setAdapter(adapter);
 

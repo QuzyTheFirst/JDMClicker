@@ -1,7 +1,7 @@
 [
   {
     "ID" : 1,
-    "Name" : "The First Track",
+    "Name" : "Field Track",
     "Length" : 10,
     "StartingCost" : 10,
     "StartingCompletionReward" : 5,
@@ -9,7 +9,7 @@
   },
   {
     "ID" : 2,
-    "Name" : "The Second Track",
+    "Name" : "Forest Track",
     "Length" : 20,
     "StartingCost" : 30,
     "StartingCompletionReward" : 25,
@@ -17,7 +17,23 @@
   },
   {
     "ID" : 3,
-    "Name" : "The Third Track",
+    "Name" : "Winter Track",
+    "Length" : 40,
+    "StartingCost" : 100,
+    "StartingCompletionReward" : 50,
+    "CompletionRewardPerUpgrade" : 20
+  },
+  {
+    "ID" : 4,
+    "Name" : "City Track",
+    "Length" : 40,
+    "StartingCost" : 100,
+    "StartingCompletionReward" : 50,
+    "CompletionRewardPerUpgrade" : 20
+  },
+  {
+    "ID" : 5,
+    "Name" : "Beach Track",
     "Length" : 40,
     "StartingCost" : 100,
     "StartingCompletionReward" : 50,

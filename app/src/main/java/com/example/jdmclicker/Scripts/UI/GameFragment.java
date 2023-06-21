@@ -13,6 +13,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.jdmclicker.R;
+import com.example.jdmclicker.Scripts.Events.IEvent;
 import com.example.jdmclicker.Scripts.GameScripts.GameManager;
 
 import java.text.DecimalFormat;
@@ -22,6 +23,8 @@ public class GameFragment extends Fragment {
     private GameManager _gameManager;
 
     private TextView _moneyCountText;
+
+    private IEvent<Float> _myMoneyChangeMethod;
 
     public GameFragment(){
         // require a empty public constructor
@@ -40,8 +43,8 @@ public class GameFragment extends Fragment {
         _moneyCountText = inflatedView.findViewById(R.id.moneyCount_text);
         _moneyCountText.setText(new DecimalFormat("##.##").format(_gameManager.getMoneyCount()) + "$");
 
-
-        _gameManager.OnMoneyValueChange.AddCallback(this::MoneyChanged);
+        _myMoneyChangeMethod = this::MoneyChanged;
+        _gameManager.OnMoneyValueChange.AddCallback(_myMoneyChangeMethod);
 
         Button driveButton = inflatedView.findViewById(R.id.driveButton);
         driveButton.setOnClickListener(new View.OnClickListener() {
@@ -61,35 +64,14 @@ public class GameFragment extends Fragment {
         _moneyCountText.setText(new DecimalFormat("##.##").format(moneyCount) + "$");
     }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        _gameManager.OnMoneyValueChange.RemoveCallback(this::MoneyChanged);
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        _gameManager.OnMoneyValueChange.RemoveCallback(this::MoneyChanged);
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        _gameManager.OnMoneyValueChange.RemoveCallback(this::MoneyChanged);
-    }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        _gameManager.OnMoneyValueChange.RemoveCallback(this::MoneyChanged);
+        Log.i("myData", "onDestroy");
+        _gameManager.OnMoneyValueChange.RemoveCallback(_myMoneyChangeMethod);
     }
 
-   @Override
-    public void onDestroyView() {
-        super.onDestroyView();
 
-        _gameManager.OnMoneyValueChange.RemoveCallback(this::MoneyChanged);
-    }
 
 }

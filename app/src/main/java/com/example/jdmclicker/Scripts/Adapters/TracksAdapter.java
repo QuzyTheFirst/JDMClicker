@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -23,8 +24,9 @@ public class TracksAdapter extends RecyclerView.Adapter<TracksAdapter.ViewHolder
     private int[] _images;
     private int _chosenTrackPosition;
 
-    public TracksAdapter(List<Track> tracks){
+    public TracksAdapter(List<Track> tracks, int[] images){
         _tracks = tracks;
+        _images = images;
     }
 
         @NonNull
@@ -54,8 +56,12 @@ public class TracksAdapter extends RecyclerView.Adapter<TracksAdapter.ViewHolder
                             "Reward: " + track.getCurrentCompletionReward()+ "$";
 
             // Set item views based on your views and data model
+            ImageView imageView = holder.trackImageView;
             TextView textView = holder.nameTextView;
             Button button = holder.buyButton;
+
+            if(position < _images.length)
+                imageView.setImageResource(_images[position]);
 
             textView.setText(description);
 
@@ -90,6 +96,7 @@ public class TracksAdapter extends RecyclerView.Adapter<TracksAdapter.ViewHolder
     public class ViewHolder extends RecyclerView.ViewHolder{
         // Your holder should contain a member variable
         // for any view that will be set as you render a row
+        public ImageView trackImageView;
         public TextView nameTextView;
         public Button buyButton;
 
@@ -102,6 +109,7 @@ public class TracksAdapter extends RecyclerView.Adapter<TracksAdapter.ViewHolder
 
             nameTextView = (TextView) itemView.findViewById(R.id.track_description);
             buyButton = (Button) itemView.findViewById(R.id.buy_button);
+            trackImageView = itemView.findViewById(R.id.trackImageView);
         }
     }
 
