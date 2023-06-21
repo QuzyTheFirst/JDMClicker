@@ -43,6 +43,14 @@ public class Shop {
             R.drawable.skyline
     };
 
+    private int[] _tracksImages = {
+            R.drawable.fieldroad,
+            R.drawable.forestroad,
+            R.drawable.winterroad,
+            R.drawable.cityroad,
+            R.drawable.beachroad
+    };
+
     public Shop(Context context, GameManager gameManager, String carsJSON, String tracksJSON, String incomesJSON){
         _context = context;
 
