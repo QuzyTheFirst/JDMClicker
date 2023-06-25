@@ -101,7 +101,8 @@ public class Shop {
     }
 
     public boolean BuyUpgradeSelectCar(Car car){
-        if(!car.isBought()){
+        if(!car.isBought() && _gameManager.getMoneyCount() >= car.getCurrentCost()){
+            _gameManager.ChangeMoneyValue(car.getCurrentCost(), GameManager.MoneyTransactionDirection.Down);
             car.Buy();
             return true;
         }
@@ -122,7 +123,8 @@ public class Shop {
     }
 
     public boolean BuyUpgradeSelectTrack(Track track){
-        if(!track.isBought()){
+        if(!track.isBought()  && _gameManager.getMoneyCount() >= track.getCurrentCost()){
+            _gameManager.ChangeMoneyValue(track.getCurrentCost(), GameManager.MoneyTransactionDirection.Down);
             track.Buy();
             return true;
         }
@@ -143,7 +145,8 @@ public class Shop {
     }
 
     public boolean BuyUpgradeIncome(PassiveIncome income){
-        if(!income.isBought()){
+        if(!income.isBought() && _gameManager.getMoneyCount() >= income.getCurrentCost()){
+            _gameManager.ChangeMoneyValue(income.getCurrentCost(), GameManager.MoneyTransactionDirection.Down);
             income.Buy();
             return true;
         }

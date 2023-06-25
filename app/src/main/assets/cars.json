@@ -3,7 +3,7 @@
     "ID" : 0,
     "Name" : "Toyota AE86 TRUENO",
     "StartingCost" : 10,
-    "StartingSpeed" : 1000,
+    "StartingSpeed" : 1,
     "SpeedPerUpgrade": 0.5
   },
   {
