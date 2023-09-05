@@ -32,10 +32,10 @@ public class IncomeFragment extends Fragment {
         View inflatedView = inflater.inflate(R.layout.fragment_income, container, false);
 
         _gameManager = GameManager.Instance;
-        _gameManager.OnMoneyValueChange.AddCallback(this::MoneyChanged);
+        _gameManager.getWallet().OnMoneyValueChange.AddCallback(this::MoneyChanged);
 
         _moneyCountText = inflatedView.findViewById(R.id.moneyCount_text);
-        _moneyCountText.setText(new DecimalFormat("##.##").format(_gameManager.getMoneyCount()) + "$");
+        _moneyCountText.setText(new DecimalFormat("##.##").format(_gameManager.getWallet().getMoneyCount()) + "$");
 
         RecyclerView rvIncomes = inflatedView.findViewById(R.id.rvIncomes);
         _gameManager.getShop().GenerateIncomesRecyclerView(rvIncomes);
@@ -51,30 +51,30 @@ public class IncomeFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
-        _gameManager.OnMoneyValueChange.RemoveCallback(this::MoneyChanged);
+        _gameManager.getWallet().OnMoneyValueChange.RemoveCallback(this::MoneyChanged);
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        _gameManager.OnMoneyValueChange.RemoveCallback(this::MoneyChanged);
+        _gameManager.getWallet().OnMoneyValueChange.RemoveCallback(this::MoneyChanged);
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        _gameManager.OnMoneyValueChange.RemoveCallback(this::MoneyChanged);
+        _gameManager.getWallet().OnMoneyValueChange.RemoveCallback(this::MoneyChanged);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        _gameManager.OnMoneyValueChange.RemoveCallback(this::MoneyChanged);
+        _gameManager.getWallet().OnMoneyValueChange.RemoveCallback(this::MoneyChanged);
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        _gameManager.OnMoneyValueChange.RemoveCallback(this::MoneyChanged);
+        _gameManager.getWallet().OnMoneyValueChange.RemoveCallback(this::MoneyChanged);
     }
 }

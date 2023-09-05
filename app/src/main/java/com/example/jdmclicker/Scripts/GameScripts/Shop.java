@@ -101,8 +101,7 @@ public class Shop {
     }
 
     public boolean BuyUpgradeSelectCar(Car car){
-        if(!car.isBought() && _gameManager.getMoneyCount() >= car.getCurrentCost()){
-            _gameManager.ChangeMoneyValue(car.getCurrentCost(), GameManager.MoneyTransactionDirection.Down);
+        if(!car.isBought() && _gameManager.getWallet().TrySpendMoney(car.getCurrentCost())){
             car.Buy();
             return true;
         }
@@ -112,8 +111,7 @@ public class Shop {
             return true;
         }
 
-        if(_gameManager.getMoneyCount() >= car.getCurrentCost()){
-            _gameManager.ChangeMoneyValue(car.getCurrentCost(), GameManager.MoneyTransactionDirection.Down);
+        if(_gameManager.getWallet().TrySpendMoney(car.getCurrentCost())){
             car.Upgrade(_carsCostMultiplicator);
             _currentCar = car;
             return true;
@@ -123,8 +121,7 @@ public class Shop {
     }
 
     public boolean BuyUpgradeSelectTrack(Track track){
-        if(!track.isBought()  && _gameManager.getMoneyCount() >= track.getCurrentCost()){
-            _gameManager.ChangeMoneyValue(track.getCurrentCost(), GameManager.MoneyTransactionDirection.Down);
+        if(!track.isBought() && _gameManager.getWallet().TrySpendMoney(track.getCurrentCost())){
             track.Buy();
             return true;
         }
@@ -134,8 +131,7 @@ public class Shop {
             return true;
         }
 
-        if(_gameManager.getMoneyCount() >= track.getCurrentCost()){
-            _gameManager.ChangeMoneyValue(track.getCurrentCost(), GameManager.MoneyTransactionDirection.Down);
+        if(_gameManager.getWallet().TrySpendMoney(track.getCurrentCost())){
             track.Upgrade(_tracksCostMultiplicator);
             _currentTrack = track;
             return true;
@@ -145,17 +141,17 @@ public class Shop {
     }
 
     public boolean BuyUpgradeIncome(PassiveIncome income){
-        if(!income.isBought() && _gameManager.getMoneyCount() >= income.getCurrentCost()){
-            _gameManager.ChangeMoneyValue(income.getCurrentCost(), GameManager.MoneyTransactionDirection.Down);
+
+        if(!income.isBought() && _gameManager.getWallet().TrySpendMoney(income.getCurrentCost())){
             income.Buy();
             return true;
         }
 
-        if(_gameManager.getMoneyCount() >=  income.getCurrentCost()){
-            _gameManager.ChangeMoneyValue(income.getCurrentCost(), GameManager.MoneyTransactionDirection.Down);
+        if(_gameManager.getWallet().TrySpendMoney(income.getCurrentCost())){
             income.Upgrade(_passiveIncomesCostMultiplicator);
             return true;
         }
+
         return false;
     }
 

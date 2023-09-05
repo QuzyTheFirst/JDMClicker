@@ -42,10 +42,10 @@ public class GameFragment extends Fragment {
         _gameManager = GameManager.Instance;
 
         _moneyCountText = inflatedView.findViewById(R.id.moneyCount_text);
-        _moneyCountText.setText(new DecimalFormat("##.##").format(_gameManager.getMoneyCount()) + "$");
+        _moneyCountText.setText(new DecimalFormat("##.##").format(_gameManager.getWallet().getMoneyCount()) + "$");
 
         _myMoneyChangeMethod = this::MoneyChanged;
-        _gameManager.OnMoneyValueChange.AddCallback(_myMoneyChangeMethod);
+        _gameManager.getWallet().OnMoneyValueChange.AddCallback(_myMoneyChangeMethod);
 
         ImageView backgroundView = inflatedView.findViewById(R.id.backgroundView);
         backgroundView.setImageResource(_gameManager.getShop().getTrackImage(_gameManager.getShop().getCurrentTrack().getID()));
@@ -76,7 +76,7 @@ public class GameFragment extends Fragment {
     public void onDestroy() {
         super.onDestroy();
         Log.i("myData", "onDestroy");
-        _gameManager.OnMoneyValueChange.RemoveCallback(_myMoneyChangeMethod);
+        _gameManager.getWallet().OnMoneyValueChange.RemoveCallback(_myMoneyChangeMethod);
     }
 
 

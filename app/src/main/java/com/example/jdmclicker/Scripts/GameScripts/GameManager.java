@@ -9,15 +9,12 @@ import com.example.jdmclicker.Scripts.Utils;
 
 
 public class GameManager implements Runnable {
-    private float _moneyCount;
-
     private Shop _shop;
+    private Wallet _wallet;
 
     private int _trackProgress = 0;
 
     public static GameManager Instance;
-
-    public EventHandler<Float> OnMoneyValueChange = new EventHandler<>();
 
     public Activity _activity;
     public Context _context;
@@ -28,6 +25,8 @@ public class GameManager implements Runnable {
         String incomesJsonFileString = Utils.getJsonFromAssets(context, "incomes.json");
 
         _shop = new Shop(context, this, carsJsonFileString, tracksJsonFileString, incomesJsonFileString);
+        _wallet = new Wallet();
+
 
         new Thread(this).start();
 
@@ -49,7 +48,7 @@ public class GameManager implements Runnable {
         _activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                ChangeMoneyValue(moneyToAdd, MoneyTransactionDirection.Up);
+                _wallet.TryAddMoney(moneyToAdd);
             }
         });
     }
@@ -59,7 +58,7 @@ public class GameManager implements Runnable {
 
         while(getTrackProgress() >= 100){
             _trackProgress -= _shop.getCurrentTrack().getTrackLength();
-            ChangeMoneyValue(_shop.getCurrentTrack().getCurrentCompletionReward(), MoneyTransactionDirection.Up);
+            _wallet.TryAddMoney(_shop.getCurrentTrack().getCurrentCompletionReward());
         }
     }
 
@@ -86,29 +85,15 @@ public class GameManager implements Runnable {
         int progress = Math.round((_trackProgress * 100) / _shop.getCurrentTrack().getTrackLength());
         return progress;
     }
-    public float getMoneyCount(){
-        return _moneyCount;
-    }
 
     public enum MoneyTransactionDirection{
         Up,
         Down
     }
 
-    public void ChangeMoneyValue(float amount, MoneyTransactionDirection direction){
-        if(direction == MoneyTransactionDirection.Up){
-            _moneyCount += amount;
-        }
-        if(direction == MoneyTransactionDirection.Down){
-            _moneyCount -= amount;
-        }
-
-        OnMoneyValueChange.invoke(this, _moneyCount);
-    }
-
-
     public Shop getShop(){
         return _shop;
     }
+    public Wallet getWallet(){return _wallet;}
 
 }
